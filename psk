@@ -23,8 +23,3 @@ do
                 echo
         fi
 done
-
-#kill $pids
-
-
-       # ps -A | grep -i $apps | sed 's/^[ \t]*//' | cut -d' ' -f1
