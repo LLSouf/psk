@@ -46,7 +46,9 @@ other  → New search term(s)
 
 ## Safety Considerations ⚠️
 ❗ Data Loss Risk: Killing processes may cause unsaved work loss
+
 🔐 Requires user confirmation before termination
+
 ⚠️ Test first without a option to verify matches
 
 ## Troubleshooting 🚨
