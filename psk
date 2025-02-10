@@ -1,0 +1,30 @@
+#!/bin/bash
+apps=$(echo "$*" | sed 's/ /\\|/')
+varchoice=''
+echo
+ps -eo comm,rss --sort=-rss | awk 'BEGIN {print "Process\t\tMemory Usage (MB)"} NR>1 {printf "%-20s\t%.2f MB\n", $1, $2/1024}' | grep -i $apps
+
+while [[ "$varchoice" != 'a' ]]
+do
+        echo
+        read -p "[a : Kill all]    [any other search for other apps] : " varchoice
+        if [ $varchoice == 'a' ]
+                then pids=$(ps -A | grep -i $apps | sed 's/^[ \t]*//' | cut -d' ' -f1)
+                kill $pids 
+                apps=$(echo $apps | sed 's/\\|/ /')
+                echo
+                echo "process(es) $apps terminated"
+                echo
+                break
+                
+                else apps=$(echo $varchoice | sed 's/ /\\|/')
+                echo
+                ps -eo comm,rss --sort=-rss | awk 'BEGIN {print "Process\t\tMemory Usage (MB)"} NR>1 {printf "%-20s\t%.2f MB\n", $1, $2/1024}' | grep -i $apps   
+                echo
+        fi
+done
+
+#kill $pids
+
+
+       # ps -A | grep -i $apps | sed 's/^[ \t]*//' | cut -d' ' -f1
